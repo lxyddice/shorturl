@@ -6,3 +6,5 @@
 API使用方法为https://xxx.com/sl.php?do=api ，POST方式传入url
 
 防止滥用建议套速率限制的cdn或nginx配置
+
+建议手动设置禁止访问links.json
