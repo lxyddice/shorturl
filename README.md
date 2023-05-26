@@ -3,4 +3,4 @@
 
 需要在sl.php把servername换成你的
 
-API使用方法为https://xxx.com/sl.php?do=api，POST方式传入url
+API使用方法为https://xxx.com/sl.php?do=api ，POST方式传入url
