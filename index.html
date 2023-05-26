@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>短链接生成器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            height: 30px;
+            margin-top: 10px;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        input[type="button"] {
+            width: 120px;
+            height: 30px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>短链接生成器</h1>
+    <form>
+        <label for="url">请输入长链接：</label>
+        <br>
+        <input type="text" id="url" required>
+        <br>
+        <input type="button" value="生成短链接" onclick="createShortLink()">
+    </form>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        function createShortLink() {
+            var urlInput = document.getElementById("url");
+            var url = urlInput.value.trim();
+
+            if (url !== "") {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var response = xhr.responseText;
+                        document.getElementById("result").innerHTML = response;
+                    }
+                };
+
+                xhr.open("POST", "sl.php", true);
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.send("url=" + encodeURIComponent(url));
+            }
+        }
+    </script>
+    <center>Use API to POST url in https://s.lxyddice.top/sl.php</center>
+    <center>Made by lxyddice 2023</center>
+</body>
+</html>
