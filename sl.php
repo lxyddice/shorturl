@@ -73,24 +73,34 @@ if (isset($_GET['shortCode'])) {
 $servername = "https://s.lxyddice.top/";
 if (isset($_POST['url'])) {
     $url = $_POST['url'];
+    $preg = "/^http(s)?:\\/\\/.+/";
+    if(preg_match($preg,$url)) {
     $existingShortLink = createShortLink($url);
-    if ($_GET['do'] != "api"){
-        // 检查长链接是否已经存在
-        if ($existingShortLink) {
-            echo "短链接生成成功：<a href=" . $servername . $existingShortLink . ">" . $servername . $existingShortLink . "</a>";
+        if ($_GET['do'] != "api"){
+            // 检查长链接是否已经存在
+            if ($existingShortLink) {
+                echo "短链接生成成功：<a href=" . $servername . $existingShortLink . ">" . $servername . $existingShortLink . "</a>";
+            } else {
+                // 创建新的短链接
+                $shortLink = createShortLink($url);
+                echo "短链接生成成功：<a href=" . $servername . $shortLink . ">" . $servername . $shortLink . "</a>";
+            }
         } else {
-            // 创建新的短链接
-            $shortLink = createShortLink($url);
-            echo "短链接生成成功：<a href=" . $servername . $shortLink . ">" . $servername . $shortLink . "</a>";
+            // 检查长链接是否已经存在
+            if ($existingShortLink) {
+                $arr = array('code' => 0, 'message' => 'success', 'shorturl' => "{$servername}{$existingShortLink}", 'longurl' => $url);
+                echo json_encode($arr, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            } else {
+                $shortLink = createShortLink($url);
+                $arr = array('code' => 0, 'message' => 'success', 'shorturl' => "{$servername}{$shortLink}", 'longurl' => $url);
+                echo json_encode($arr, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            }
         }
     } else {
-        // 检查长链接是否已经存在
-        if ($existingShortLink) {
-            $arr = array('code' => 0, 'shorturl' => "{$servername}{$existingShortLink}", 'longurl' => $url);
-            echo json_encode($arr, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        if ($do != "api") {
+            echo("短链接生成失败：不是合法的链接");
         } else {
-            $shortLink = createShortLink($url);
-            $arr = array('code' => 0, 'shorturl' => "{$servername}{$shortLink}", 'longurl' => $url);
+            $arr = array('code' => -1, 'message' => '不是合法的链接', 'shorturl' => "", 'longurl' => $url);
             echo json_encode($arr, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         }
     }
