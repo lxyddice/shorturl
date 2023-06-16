@@ -98,7 +98,7 @@ if (isset($_POST['url'])) {
         }
     } else {
         if ($do != "api") {
-            echo("短链接生成失败：不是合法的链接");
+            echo ("不是合法的链接");
         } else {
             $arr = array('code' => -1, 'message' => '不是合法的链接', 'shorturl' => "", 'longurl' => $url);
             echo json_encode($arr, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
