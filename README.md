@@ -11,8 +11,7 @@ API使用方法为https://xxx.com/sl.php?do=api ，POST方式传入url
 
 伪静态配置（nginx）
 
-<code>
-  location / {
+<code>location / {
     rewrite ^/([a-zA-Z0-9]+)$ /sl.php?shortCode=$1 last;
   }
 </code>
