@@ -15,3 +15,5 @@ API使用方法为https://xxx.com/sl.php?do=api ，POST方式传入url
     rewrite ^/([a-zA-Z0-9]+)$ /sl.php?shortCode=$1 last;
   }
 </code>
+
+演示站点：[https://s.lxyddice.top/](https://s.lxyddice.top/)
