@@ -27,13 +27,13 @@ location / {
 
 ### sl.php是API主文件，请尝试添加密钥验证防止被炸，比如：
 
-<code>
+
 if ($_GET["key"] != "114514") {
     exit();
 }
-</code>
 
-<code>
+## nginx伪静态规则
+
 location /
 {
 	 try_files $uri $uri/ /index.php?$args;
@@ -41,4 +41,4 @@ location /
 location ~* ^/.*.(json)$ {
     deny all;
 }
-</code>
+
