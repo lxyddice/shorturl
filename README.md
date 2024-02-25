@@ -17,3 +17,7 @@ API使用方法为https://xxx.com/sl.php?do=api ，POST方式传入url
 </code>
 
 演示站点：[https://s.lxyddice.top/](https://s.lxyddice.top/)
+
+# 我去，我居然更新它了！快看我！
+
+###### 求求有大佬帮我写个前端喵（
